@@ -2,8 +2,10 @@
   "name": "arkham-campaign-log",
   "version": "1.0.0",
   "description": "Online Campaign Log for Arkham Horror the Card Game",
-  "main": "app.js",
+  "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +20,7 @@
   "homepage": "https://github.com/Hammers/arkham-campaign-log#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
