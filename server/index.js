@@ -16,6 +16,7 @@ mongoose.connect("mongodb://localhost/arkham");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 app.use("/api/campaigns", campaignRoutes);
 app.set("view engine", "http");
 
