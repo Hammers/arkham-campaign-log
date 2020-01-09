@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <CampaignComponent />
+    <CampaignList />
   </div>
 </template>
 
 <script>
-import CampaignComponent from './components/CampaignComponent.vue'
+import CampaignList from './components/campaignMenu/CampaignList.vue'
 
 export default {
   name: 'app',
   components: {
-    CampaignComponent
+    CampaignList
   }
 }
 </script>
