@@ -1,16 +1,21 @@
 <template>
-  <div id="app">
-    <CampaignList />
+  <div class="container mt-3">
+    <Header></Header>
+    <div class="row mt-4">
+      <div class="col-12">
+        <router-view></router-view>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import CampaignList from './components/campaignMenu/CampaignList.vue'
+import Header from "./components/Header";
 
 export default {
   name: 'app',
   components: {
-    CampaignList
+    Header
   }
 }
 </script>

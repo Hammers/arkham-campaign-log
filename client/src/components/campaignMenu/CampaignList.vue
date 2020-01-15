@@ -1,22 +1,23 @@
 <template>
-  <div class="container">
-    <CampaignNewModal v-if="showNewModal" @close="showNewModal=false">
-      
-    </CampaignNewModal>
+  <div class="card">
+    <CampaignNewModal v-if="showNewModal" @close="showNewModal=false"></CampaignNewModal>
+    <div class="card-header">
     <h1>Campaigns</h1>
-    <div class="create-campaign">
-      <button @click="showNewModal = true">Start New Campaign</button>
     </div>
-    <hr>
-    <p class="error" v-if="error">{{ error }}</p>
-    <div class="campaigns-container">
-      <CampaignListItem
-           v-for="(campaign, index) in campaigns"
-           v-bind:campaign="campaign"
-           v-bind:index="index"
-           v-bind:key="campaign._id"
-      >
-      </CampaignListItem>
+    <div class="card-body">
+      <div class="create-campaign">
+        <button @click="showNewModal = true" class="btn btn-primary">Start New Campaign</button>
+      </div>
+      <p class="error" v-if="error">{{ error }}</p>
+      <div class="campaigns-container">
+        <CampaignListItem
+             v-for="(campaign, index) in campaigns"
+             v-bind:campaign="campaign"
+             v-bind:index="index"
+             v-bind:key="campaign._id"
+        >
+        </CampaignListItem>
+      </div>
     </div>
   </div>
 </template>
@@ -55,10 +56,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  div.container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
   
   p.error {
     border: 1px solid #ff5b5f;
