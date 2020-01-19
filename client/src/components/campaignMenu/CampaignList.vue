@@ -5,11 +5,11 @@
     <h1>Campaigns</h1>
     </div>
     <div class="card-body">
-      <div class="create-campaign">
-        <button @click="showNewModal = true" class="btn btn-primary">Start New Campaign</button>
-      </div>
-      <p class="error" v-if="error">{{ error }}</p>
-      <div class="campaigns-container">
+      <p class="alert alert-danger m-3" v-if="error">{{ error }}</p>
+      <div class="campaigns-container" v-if="!error">
+        <div class="create-campaign">
+          <button @click="showNewModal = true" class="btn btn-primary" @close="onModalClose">Start New Campaign</button>
+        </div>
         <CampaignListItem
              v-for="(campaign, index) in campaigns"
              v-bind:campaign="campaign"
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CampaignService from "../../CampaignService";
+import CampaignService from "../../axios/CampaignService";
 import CampaignListItem from "./CampaignListItem";
 import CampaignNewModal from "./CampaignNewModal";
 
@@ -40,15 +40,14 @@ export default {
   },
   async created() {
     try {
-      this.campaigns = await CampaignService.getCampaigns();
+      this.campaigns = await CampaignService.getCampaigns(this.$store.getters.token);
     } catch(err) {
       this.error = err.message;
     }
   },
   methods: {
-    async createCampaign() {
-      await CampaignService.insertCampaign(this.name);
-      this.campaigns = await CampaignService.getCampaigns();
+    async onModalClose() {
+      this.campaigns = await CampaignService.getCampaigns(this.$store.getters.token);
     }
   }
 }
@@ -56,13 +55,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
-  p.error {
-    border: 1px solid #ff5b5f;
-    background-color: #ffc5c1;
-    padding: 10px;
-    margin-bottom: 15px;
-  }
   
   
 </style>

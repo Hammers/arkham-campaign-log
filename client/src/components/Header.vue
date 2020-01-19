@@ -7,9 +7,9 @@
                 <router-link to="/campaigns" active-class="active" tag="li" class="nav-item"><a class="nav-link">Campaigns</a></router-link>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item" ><a class="nav-link">Log In</a></li>
-                <li class="nav-item" ><a class="nav-link">Sign Up</a></li>
-                <li class="nav-item" ><a class="nav-link">Log Out</a></li>
+                <router-link v-if="!token" to="/login" active-class="active" tag="li" class="nav-item"><a class="nav-link">Log In</a></router-link>
+                <router-link v-if="!token" to="/signup" active-class="active" tag="li" class="nav-item"><a class="nav-link">Signup</a></router-link>
+                <li v-if="token" @click="logout" class="nav-item"><a class="nav-link">Log Out</a></li>
             </ul>
         </div>
     </nav>
@@ -18,7 +18,16 @@
 <script>
     export default {
         name: "",
-
+        computed: {
+            token() {
+                return this.$store.getters.token;
+            }
+        },
+        methods: {
+            logout() {
+                this.$store.dispatch('logout');
+            }
+        }
     }
 </script>
 

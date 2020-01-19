@@ -9,11 +9,11 @@
                     </div>
 
                     <div class="modal-body">
-                        <input type="text">
+                        <input type="text" v-model="campaignName">
                     </div>
 
                     <div class="modal-footer">
-                        <button class="modal-default-button" @click="$emit('close')">
+                        <button class="modal-default-button" @click="createCampaign">
                             OK
                         </button>
                     </div>
@@ -24,8 +24,21 @@
 </template>
 
 <script>
+    import CampaignService from "../../axios/CampaignService";
+    
     export default {
-        name: "CampaignNewModal"
+        name: "CampaignNewModal",
+        data() {
+            return {
+                campaignName : ''
+            }
+        },
+        methods: {
+        async createCampaign() {
+            await CampaignService.insertCampaign(this.$store.getters.token,this.campaignName);
+            this.$emit('close');
+        }
+    }
     }
 </script>
 
