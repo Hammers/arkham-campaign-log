@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ROBA",
+    "name": "Roland Banks",
+    "health": 9,
+    "sanity": 5,
+    "class": "Guardian",
+    "willpower": 3,
+    "intellect": 3,
+    "fight": 4,
+    "agility": 2,
+    "ability": "After you defeat an enemy: Discover 1 clue at your location. (Limit once per round)",
+    "elder_sign": "+1 for each clue at your location",
+    "deck_size": 30
+  },
+  {
+    "id": "AGBA",
+    "name": "Agnes Baker",
+    "health": 6,
+    "sanity": 8,
+    "class": "Mystic",
+    "willpower": 5,
+    "intellect": 2,
+    "fight": 2,
+    "agility": 3,
+    "ability": "After one or more horror is placed on Agnes Baker: Deal 1 damage to an enemy at your location. (Limit once per phase)",
+    "elder_sign": "+1 for each horror on agnes baker",
+    "deck_size": 30
+  }
+]

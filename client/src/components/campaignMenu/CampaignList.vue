@@ -1,6 +1,5 @@
 <template>
   <div class="card">
-    <CampaignNewModal v-if="showNewModal" @close="showNewModal=false"></CampaignNewModal>
     <div class="card-header">
     <h1>Campaigns</h1>
     </div>
@@ -8,7 +7,7 @@
       <p class="alert alert-danger m-3" v-if="error">{{ error }}</p>
       <div class="campaigns-container" v-if="!error">
         <div class="create-campaign">
-          <button @click="showNewModal = true" class="btn btn-primary" @close="onModalClose">Start New Campaign</button>
+          <button @click="newCampaign" class="btn btn-primary">Start New Campaign</button>
         </div>
         <CampaignListItem
              v-for="(campaign, index) in campaigns"
@@ -25,17 +24,15 @@
 <script>
 import CampaignService from "../../axios/CampaignService";
 import CampaignListItem from "./CampaignListItem";
-import CampaignNewModal from "./CampaignNewModal";
 
 export default {
   name: 'CampaignList',
-  components: {CampaignNewModal, CampaignListItem},
+  components: {CampaignListItem},
   data() {
     return {
       campaigns: [],
       error: '',
       name: '',
-      showNewModal: false,
     }
   },
   async created() {
@@ -46,8 +43,8 @@ export default {
     }
   },
   methods: {
-    async onModalClose() {
-      this.campaigns = await CampaignService.getCampaigns(this.$store.getters.token);
+    newCampaign() {
+      this.$router.push('/campaigns/new');
     }
   }
 }

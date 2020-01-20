@@ -62,12 +62,12 @@ const actions = {
     tryAutoLogin({commit}) {
         const token = localStorage.getItem("ARK_COM_TOKEN");
         if (!token) {
-            return
+            return;
         }
         const expDate = localStorage.getItem("ARK_COM_EXP");
         const now = new Date();
         if(now >= expDate) {
-            return
+            return;
         }
         const user = localStorage.getItem("ARK_COM_USER");
         commit('authUser', {

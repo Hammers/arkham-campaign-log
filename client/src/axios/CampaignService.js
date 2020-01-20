@@ -20,12 +20,8 @@ class CampaignService {
         });
     }
     
-    static insertCampaign(token,name) {
-        return axios.post(url + '?secret_token=' + token, {
-            name: name,
-            cycleID: "NZ",
-            currentScenarios: "NZ0"
-        });
+    static insertCampaign(token,campaign) {
+        return axios.post(url + '?secret_token=' + token, campaign);
     }
     
     static deleteCampaign(id) {

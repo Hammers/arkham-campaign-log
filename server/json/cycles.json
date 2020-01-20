@@ -1,8 +1,0 @@
-[
-  {
-    "id": "NZ",
-    "title": "The Night of the Zealot",
-    "scenarios": ["NZ0","NZ1","NZ2"],
-    "startingScenarios": ["NZ0"]
-  }
-]

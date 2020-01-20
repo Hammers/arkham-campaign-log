@@ -1,0 +1,26 @@
+[
+  {
+    "id": "NZ",
+    "title": "The Night of the Zealot",
+    "scenarios": ["NZ0","NZ1","NZ2"],
+    "chaosBags": {
+      "Easy":     ["p1","p1", "0", "0", "0","m1","m1","m1","mH2","m2","sk","sk","cu","ta","af","es"],
+      "Standard": ["p1", "0", "0","m1","m1","m1","m2","m2","m3","m4","sk","sk","cu","ta","af","es"],
+      "Hard":     [ "0", "0", "0","m1","m1","m2","m2","m3","m3","m4","m5","sk","sk","cu","ta","af","es"],
+      "Expert":   [ "0","m1","m1","m2","m2","m3","m3","m4","m4","m5","m6","m8","sk","sk","cu","ta","af","es"]
+    },
+    "startingScenarios": ["NZ0"]
+  },
+  {
+    "id": "DL",
+    "title": "The Dunwich Legacy",
+    "scenarios": ["DL0","DL1","DL2","DL3","DL4","DL5","DL6","DL7"],
+    "chaosBags": {
+      "Easy":     ["p","p1", "0", "0", "0","m1","m1","m1","m2","m2","sk","sk","cu","af","es"],
+      "Standard": ["p1", "0", "0","m1","m1","m1","m2","m2","m3","m4","sk","sk","cu","af","es"],
+      "Hard":     [ "0", "0", "0","m1","m1","m2","m2","m3","m3","m4","m5","sk","sk","cu","af","es"],
+      "Expert":   [ "0","m1","m1","m2","m2","m3","m3","m4","m4","m5","m6","m8","sk","sk","cu","af","es"]
+    },
+    "startingScenarios": ["DL0","DL1"]
+  }
+]
