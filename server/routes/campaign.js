@@ -16,7 +16,7 @@ router.get("/:id", (req, res, next) => {
         if(err) {
             return next(err);
         }
-        if(campaign._id !== req.user._id)
+        if(campaign.ownerId !== req.user._id)
         {
             return next("Unauthorized Access");
         }
@@ -35,30 +35,44 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.put("/", (req, res, next) => {
-    Campaign.findByIdAndUpdate(req.params.id, req.body, (err, campaign) =>{
+router.put("/:id", (req, res, next) => {
+    Campaign.findById(req.params.id, (err, campaign) =>{
         if(err) {
             return next(err);
         }
-        if(campaign._id !== req.user._id)
+        console.log(campaign);
+        console.log(req.user._id);
+        if(campaign.ownerId.toString() !== req.user._id.toString())
         {
             return next("Unauthorized Access");
         }
-        res.json(campaign);
+        Campaign.update({_id: req.params.id}, req.body, (err, campaign) =>{
+            if(err) {
+                return next(err);
+            }
+            res.json(campaign);
+        });
     });
+    
 });
 
 router.delete("/:id", (req, res, next) => {
-    Campaign.findByIdAndDelete(req.params.id, (err) =>{
+    Campaign.findById(req.params.id, (err, campaign) =>{
         if(err) {
             return next(err);
         }
-        if(campaign._id !== req.user._id)
+        if(campaign.ownerId !== req.user._id)
         {
             return next("Unauthorized Access");
         }
-        res.json();
+        Campaign.findByIdAndDelete(req.params.id, (err) =>{
+            if(err) {
+                return next(err);
+            }
+            res.json();
+        });
     });
+    
 });
 
 module.exports = router;

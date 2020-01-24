@@ -24,8 +24,13 @@ class CampaignService {
         return axios.post(url + '?secret_token=' + token, campaign);
     }
     
-    static deleteCampaign(id) {
-        return axios.delete(`${url}${id}`);
+    static deleteCampaign(token,id) {
+        return axios.delete(`${url}${id}?secret_token=${token}`);
+    }
+    
+    static updateCampaign(token, campaign) {
+        console.log(campaign);
+        return axios.put(`${url}${campaign._id}?secret_token=${token}`, campaign)
     }
 }
 

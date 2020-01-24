@@ -1,0 +1,53 @@
+{
+  "NZ": {
+    "NZ0": {
+      "view": "Prologue",
+      "name": "Prologue",
+      "text": "This is the intro text for Night of the Zealot",
+      "nextScenario": "NZ1"
+    },
+    "NZ1": {
+      "view": "StandardScenario",
+      "name": "The Gathering",
+      "intro": "This is the intro text for The Gathering",
+      "setup": "This is the setup text for The Gathering",
+      "nextScenario": "NZ2"
+    },
+    "NZ2": {
+      "view": "StandardScenario",
+      "name": "The Midnight Masks",
+      "intro": "This is the intro text for The Midnight Masks",
+      "setup": "This is the setup text for The Midnight Masks",
+      "nextScenario": "NZ3"
+    },
+    "NZ3": {
+      "view": "StandardScenario",
+      "name": "The Devourer Below",
+      "intro": "This is the intro text for The Gathering",
+      "setup": "This is the setup text for The Gathering",
+      "nextScenario": null
+    }
+  },
+  "DL": {
+    "DL0": {
+      "view": "Prologue",
+      "name": "Prologue",
+      "text": "This is the intro text for The Dunwich Legacy",
+      "nextScenario": ["DL1","DL2"]
+    },
+    "DL1": {
+      "view": "StandardScenario",
+      "name": "Extracurricular Activity",
+      "intro": "This is the intro text for The Gathering",
+      "setup": "This is the setup text for The Gathering",
+      "nextScenario": null
+    },
+    "DL2": {
+      "view": "StandardScenario",
+      "name": "The Gathering",
+      "intro": "This is the intro text for The Gathering",
+      "setup": "This is the setup text for The Gathering",
+      "nextScenario": null
+    }
+  }
+}

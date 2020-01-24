@@ -9,7 +9,7 @@
       "Hard":     [ "0", "0", "0","m1","m1","m2","m2","m3","m3","m4","m5","sk","sk","cu","ta","af","es"],
       "Expert":   [ "0","m1","m1","m2","m2","m3","m3","m4","m4","m5","m6","m8","sk","sk","cu","ta","af","es"]
     },
-    "startingScenarios": ["NZ0"]
+    "startingScenario": "NZ0"
   },
   {
     "id": "DL",
@@ -21,6 +21,6 @@
       "Hard":     [ "0", "0", "0","m1","m1","m2","m2","m3","m3","m4","m5","sk","sk","cu","af","es"],
       "Expert":   [ "0","m1","m1","m2","m2","m3","m3","m4","m4","m5","m6","m8","sk","sk","cu","af","es"]
     },
-    "startingScenarios": ["DL0","DL1"]
+    "startingScenario": "DL0"
   }
 ]

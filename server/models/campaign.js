@@ -19,7 +19,8 @@ const campaignSchema = mongoose.Schema({
             mentalTrauma: Number,
             weaknesses: [String],
             additionalCards: [String]
-        }]
+        }],
+        log: [String]
     },
     {
         timestamps: true

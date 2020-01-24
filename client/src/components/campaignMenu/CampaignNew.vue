@@ -32,7 +32,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary mb-3" @click.prevent="addPlayer">AddPlayer</button>
                                 <div class="row justify-content-around">
-                                    <Player v-for="(player,index) in this.players" @changed="onPlayerUpdate(index,$event)" @remove="onPlayerRemove(index)" :key="index"></Player>
+                                    <PlayerNew v-for="(player,index) in this.players" @changed="onPlayerUpdate(index,$event)" @remove="onPlayerRemove(index)" :key="index"></PlayerNew>
                                 </div>
                             </div>
                         </div>
@@ -48,14 +48,14 @@
 </template>
 
 <script>
-    import Player from "./Player";
+    import PlayerNew from "./PlayerNew";
     import CampaignService from "../../axios/CampaignService";
     import cycles from '../../json/cycles.json'
     
     export default {
         name: "CampaignNew",
         components: {
-            Player
+            PlayerNew
         },
         data() {
             return {
@@ -74,7 +74,8 @@
                     name: this.campaignName,
                     difficulty: this.difficulty,
                     players: this.players,
-                    chaosBag: this.cycle.chaosBags[this.difficulty]
+                    chaosBag: this.cycle.chaosBags[this.difficulty],
+                    currentScenario: this.cycle.startingScenario
                 };
                 await CampaignService.insertCampaign(this.$store.getters.token,campaign);
                 await this.$router.push('/campaigns');

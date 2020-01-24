@@ -1,24 +1,22 @@
 <template>
-    <div class="card col-5 my-2">
+    <div class="card w-100">
         <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <label for="investigatorSelect">Investigator</label>
-                    <select class="form-control" id="investigatorSelect" v-model="investigator">
-                        <option v-for="i in investigators" :value="i" :key="i.id">{{i.name}}</option>
-                    </select>
+            <h3 class="text d-flex justify-content-between">
+                <span>{{this.player.playerName}}</span>
+                <span>{{investigator.name}}</span>
+            </h3>
+            <div class="row my-1 justify-content-center">
+                <span class="col-2">XP:</span>
+                <div class="col-6 align-self-center">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" :style="{width: (this.player.spentXp / this.player.totalXp) + '%'}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{this.player.spentXp}} / {{this.player.totalXp}}</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="playerName">Player Name</label>
-                    <input type="text" class="form-control" id="playerName" v-model.lazy="playerName">
-                </div>
-                <div v-if="investigator">
-                    <p>Willpower: {{investigator.willpower}}, Intellect: {{investigator.intellect}}, Fight: {{investigator.fight}}, Agility: {{investigator.agility}}</p>
-                </div>
-                <div class="mt-3 d-flex justify-content-between">
-                    <button class="btn btn-danger" @click.prevent="remove">Remove</button>
-                </div>
-            </form>
+            </div>
+            <div class="row justify-content-around my-1">
+                <span>Physical Trauma: {{player.physicalTrauma}}</span>
+                <span>Mental Trauma: {{player.mentalTrauma}}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -27,25 +25,11 @@
     import investigators from '../../json/investigators'
     export default {
         name: "",
-        data() {
-            return {
-                investigators,
-                investigator: null,
-                playerName: ''
+        props: ["player"],
+        computed: {
+            investigator() {
+                return investigators.find(x => x.id === this.player.investigatorID);
             }
-        },
-        watch: {
-            playerName: function (newName,oldName) {
-                this.$emit('changed',{investigator: this.investigator,player:this.playerName});
-            },
-            investigator: function (newInvestigator,oldInvestigator) {
-                this.$emit('changed',{investigator: this.investigator,player:this.playerName});
-            }
-        },
-        methods: {
-            remove(){
-                this.$emit('remove');
-            },
         }
     }
 </script>

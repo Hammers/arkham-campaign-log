@@ -14,6 +14,7 @@
              v-bind:campaign="campaign"
              v-bind:index="index"
              v-bind:key="campaign._id"
+             @click="selectCampaign(campaign)"
         >
         </CampaignListItem>
       </div>
@@ -30,22 +31,22 @@ export default {
   components: {CampaignListItem},
   data() {
     return {
-      campaigns: [],
       error: '',
       name: '',
     }
   },
-  async created() {
-    try {
-      this.campaigns = await CampaignService.getCampaigns(this.$store.getters.token);
-    } catch(err) {
-      this.error = err.message;
+  computed:{
+    campaigns() {
+      return this.$store.getters.campaigns;
     }
+  },
+  async created() {
+    await this.$store.dispatch('getCampaigns');
   },
   methods: {
     newCampaign() {
       this.$router.push('/campaigns/new');
-    }
+    },
   }
 }
 </script>
