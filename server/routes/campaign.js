@@ -27,6 +27,8 @@ router.get("/:id", (req, res, next) => {
 router.post("/", (req, res, next) => {
     let campaign = req.body;
     campaign.ownerId = req.user._id;
+    console.log('INSERT:');
+    console.log(campaign);
     Campaign.create(campaign, (err, newCampaign) =>{
         if(err) {
             return next(err);
@@ -40,12 +42,13 @@ router.put("/:id", (req, res, next) => {
         if(err) {
             return next(err);
         }
-        console.log(campaign);
-        console.log(req.user._id);
+        
         if(campaign.ownerId.toString() !== req.user._id.toString())
         {
             return next("Unauthorized Access");
         }
+        console.log('UPDATE:');
+        console.log(campaign);
         Campaign.update({_id: req.params.id}, req.body, (err, campaign) =>{
             if(err) {
                 return next(err);
@@ -61,10 +64,12 @@ router.delete("/:id", (req, res, next) => {
         if(err) {
             return next(err);
         }
-        if(campaign.ownerId !== req.user._id)
+        if(campaign.ownerId.toString() !== req.user._id.toString())
         {
             return next("Unauthorized Access");
         }
+        console.log("DELETE:");
+        console.log(campaign);
         Campaign.findByIdAndDelete(req.params.id, (err) =>{
             if(err) {
                 return next(err);

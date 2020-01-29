@@ -4,16 +4,17 @@
             <form>
                 <div class="form-group">
                     <label for="investigatorSelect">Investigator</label>
-                    <select class="form-control" id="investigatorSelect" v-model="investigator">
-                        <option v-for="i in investigators" :value="i" :key="i.id">{{i.name}}</option>
+                    <select class="form-control" id="investigatorSelect" v-model="playerData.investigatorID">
+                        <option v-for="i in investigators" :value="i.id" :key="i.id">{{i.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="playerName">Player Name</label>
-                    <input type="text" class="form-control" id="playerName" v-model.lazy="playerName">
+                    <input type="text" class="form-control" id="playerName" v-model.lazy="playerData.playerName">
                 </div>
-                <div v-if="investigator">
-                    <p>Willpower: {{investigator.willpower}}, Intellect: {{investigator.intellect}}, Fight: {{investigator.fight}}, Agility: {{investigator.agility}}</p>
+                <div class="form-group">
+                    <label for="lead">Lead Investigator</label>
+                    <input type="radio" class="form-control" id="lead" @change="changedLead" :value="true" v-model="playerData.isLead">
                 </div>
                 <div class="mt-3 d-flex justify-content-between">
                     <button class="btn btn-danger" @click.prevent="remove">Remove</button>
@@ -27,25 +28,19 @@
     import investigators from '../../json/investigators'
     export default {
         name: "",
-        data() {
+        props: ["playerData"],
+        data () {
             return {
-                investigators,
-                investigator: null,
-                playerName: ''
-            }
-        },
-        watch: {
-            playerName: function (newName,oldName) {
-                this.$emit('changed',{investigator: this.investigator,playerName:this.playerName});
-            },
-            investigator: function (newInvestigator,oldInvestigator) {
-                this.$emit('changed',{investigator: this.investigator,playerName:this.playerName});
+                investigators
             }
         },
         methods: {
             remove(){
                 this.$emit('remove');
             },
+            changedLead(){
+                this.$emit('changedLead');
+            }
         }
     }
 </script>

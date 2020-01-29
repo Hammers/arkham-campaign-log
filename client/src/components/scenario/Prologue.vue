@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <p>{{scenario.text}}</p>
+        <span v-html="scenario.text"></span>
         <div>
             <button class="btn btn-primary btn-large" @click="nextScenario">Continue</button>
         </div>
@@ -23,6 +23,7 @@
         methods: {
             nextScenario() {
                 this.campaign.currentScenario = this.scenario.nextScenario;
+                console.log(this.campaign);
                 this.$store.dispatch('updateCurrentCampaign');
             }
         }

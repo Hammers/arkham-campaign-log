@@ -18,9 +18,15 @@ const campaignSchema = mongoose.Schema({
             physicalTrauma: Number,
             mentalTrauma: Number,
             weaknesses: [String],
-            additionalCards: [String]
+            additionalCards: [String],
+            isLead: Boolean
         }],
-        log: [String]
+        log: [{
+            logType: String,
+            name: String,
+            value: Number,
+            entries: [String]
+        }]
     },
     {
         timestamps: true

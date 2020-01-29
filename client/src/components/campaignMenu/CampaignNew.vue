@@ -32,7 +32,7 @@
                             <div class="card-body">
                                 <button class="btn btn-primary mb-3" @click.prevent="addPlayer">AddPlayer</button>
                                 <div class="row justify-content-around">
-                                    <PlayerNew v-for="(player,index) in this.players" @changed="onPlayerUpdate(index,$event)" @remove="onPlayerRemove(index)" :key="index"></PlayerNew>
+                                    <PlayerNew v-for="(player,index) in this.players" @remove="onPlayerRemove(index)" @changedLead="onLeadChanged(index)" :key="index" :playerData="player"></PlayerNew>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,8 @@
                     difficulty: this.difficulty,
                     players: this.players,
                     chaosBag: this.cycle.chaosBags[this.difficulty],
-                    currentScenario: this.cycle.startingScenario
+                    currentScenario: this.cycle.startingScenario,
+                    log: this.cycle.defaultLogs
                 };
                 await CampaignService.insertCampaign(this.$store.getters.token,campaign);
                 await this.$router.push('/campaigns');
@@ -84,22 +85,35 @@
                 this.$router.back();
             },
             addPlayer(){
-                this.players.push({});
-            },
-            onPlayerUpdate(index,playerData){
-                this.players[index] = {
-                    investigatorID: playerData.investigator.id,
-                    playerName: playerData.playerName,
+                this.players.push({
+                    investigatorID: null,
+                    playerName: "",
+                    isLead: this.players.length === 0,
                     totalXp: 0,
                     spentXp: 0,
                     physicalTrauma: 0,
                     mentalTrauma: 0,
                     weaknesses: [],
                     additionalCards: []
-                }
+                });
             },
             onPlayerRemove(index){
-                this.players.splice(index,1);
+                let player = this.players.splice(index,1);
+                if(player.isLead && this.players.length > 0)
+                {
+                    this.players[0].isLead = true;
+                }
+            },
+            onLeadChanged(index){
+                console.log("lead changed");
+                console.log(this.players[index]);
+                if(this.players[index].isLead) {
+                    for(let i = 0; i < this.players.length; i++) {
+                        if(i === index)
+                            continue;
+                        this.players[i].isLead = false;
+                    }
+                }
             }
         }
     }

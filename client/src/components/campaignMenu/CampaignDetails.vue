@@ -12,7 +12,6 @@
                         <button class="btn btn-large btn-primary" @click="startScenario">Go!</button>
                     </div>
                     
-                    
                     <div class="card my-3">
                         <div class="card-header"><h4>Chaos Bag</h4></div>
                         <div  class="card-body"><img style="width: 50px;height:50px" v-for="(token,index) in campaign.chaosBag" :src="'../imgs/' + token + '.png'" alt="" :key="index"></div>
@@ -27,6 +26,25 @@
                         </div>
                     </div>
 
+                    <div class="card my-3">
+                        <div class="card-header"><h4>Campaign Log</h4></div>
+                        <div  class="card-body">
+                            <div v-for="(log,index) in campaign.log" :key="index" :log="log">
+                                <div v-if="log.logType === 'list'">
+                                    <p><strong>{{log.name}}</strong></p>
+                                    <ul>
+                                        <li v-for="(entry,entryIndex) in log.entries" :key="entryIndex">{{entry}}</li>
+                                    </ul>
+                                </div>
+                                <div v-else>
+                                    <p><strong>{{log.name}}</strong>: {{log.value}}</p>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="mt-3 d-flex justify-content-between">
                         <button class="btn btn-danger" @click.prevent="back">Back</button>
                     </div>

@@ -8,8 +8,9 @@
             <div class="row my-1 justify-content-center">
                 <span class="col-2">XP:</span>
                 <div class="col-6 align-self-center">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" :style="{width: (this.player.spentXp / this.player.totalXp) + '%'}" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">{{this.player.spentXp}} / {{this.player.totalXp}}</div>
+                    <div class="progress position-relative">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" :style="{width: xpPercent + '%'}" :aria-valuenow="xpPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                        <small class="justify-content-center d-flex position-absolute w-100">{{this.player.spentXp}} / {{this.player.totalXp}}</small>
                     </div>
                 </div>
             </div>
@@ -29,6 +30,9 @@
         computed: {
             investigator() {
                 return investigators.find(x => x.id === this.player.investigatorID);
+            },
+            xpPercent() {
+                return (this.player.spentXp / this.player.totalXp) * 100;
             }
         }
     }
