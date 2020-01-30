@@ -8,6 +8,7 @@
     },
     "NZ1": {
       "view": "StandardScenario",
+      "resolutionView": "StandardResolution",
       "name": "The Gathering",
       "intro": "<p>You and your partners have been investigating strange events taking place in your home city of Arkham, Massachusetts. Over the past few weeks, several townspeople have mysteriously gone missing. Recently, their corpses turned up in the woods, savaged and half-eaten. The police and newspapers have stated that wild animals are responsible, but you believe there is something else going on. You are gathered together at the lead investigator’s home to discuss these bizarre events.<p>",
       "setup": "<ul><li>Gather all cards from the following encounter sets: The Gathering, Rats, Ghouls, Striking Fear, Ancient Evils, and Chilling Cold. These sets are indicated by the following icons:</li><li>Put the Study location into play. Set each other location aside, out of play. Each investigator begins play in the Study.</li><li>Set the Ghoul Priest and Lita Chantler cards aside, out of play.</li><li>Shuffle the remainder of the encounter cards (from the previously gathered encounter sets) to form the encounter deck</li>",
@@ -28,13 +29,15 @@
             "type": "cardGain",
             "cardName": "Lita Chandler",
             "optional": true,
-            "player": "lead"
+            "player": "lead",
+            "text": "The lead investigator earns the Lita Chantler card and may include it in his or her deck. This card does not count toward that investigator’s deck size."
           },
           {
             "type": "xp",
             "includeDisplay": true,
             "bonus": 2,
-            "player": "all"
+            "player": "all",
+            "text": "Each investigator earns 2 bonus experience as he or she gains insight into the hidden world of the Mythos"
           }
         ]
       }, 
@@ -49,19 +52,22 @@
           {
             "type": "mentalTrauma",
             "amount": 1,
-            "player": "lead"
+            "player": "lead",
+            "text": "The lead investigator suffers 1 mental trauma from watching his or her home become a smoldering ruin."
           },
           {
             "type": "cardGain",
             "cardName": "Lita Chandler",
             "optional": true,
-            "player": "lead"
+            "player": "lead",
+            "text": "The lead investigator earns the Lita Chantler card and may include it in his or her deck. This card does not count toward that investigator’s deck size."
           },
           {
             "type": "xp",
             "includeDisplay": true,
             "bonus": 2,
-            "player": "all"
+            "player": "all",
+            "text": "Each investigator earns 2 bonus experience as he or she gains insight into the hidden world of the Mythos"
           }
         ]
       },
@@ -77,13 +83,15 @@
               "type": "xp",
               "includeDisplay": false,
               "amount": 1,
-              "player": "lead"
+              "player": "lead",
+              "test": "The lead investigator earns 1 experience, as he or she refuses to let the night’s events destroy his or her life."
             },
             {
               "type": "xp",
               "includeDisplay": true,
               "bonus": 2,
-              "player": "all"
+              "player": "all",
+              "text": "Each investigator earns 2 bonus experience as he or she gains insight into the hidden world of the Mythos"
             }
           ]
         }, 
@@ -105,7 +113,8 @@
             },
             {
               "type": "kill",
-              "player": "defeated"
+              "player": "defeated",
+              "text": "Each investigator who has not resigned is killed. If there are not enough investigators to continue the campaign, the campaign is over and the players lose. Otherwise, advance to the next scenario."
             }
           ]
         }
@@ -113,6 +122,7 @@
     },
     "NZ2": {
       "view": "StandardScenario",
+      "resolutionView": "StandardResolution",
       "name": "The Midnight Masks",
       "intro": "This is the intro text for The Midnight Masks",
       "setup": "This is the setup text for The Midnight Masks",
@@ -120,6 +130,7 @@
     },
     "NZ3": {
       "view": "StandardScenario",
+      "resolutionView": "StandardResolution",
       "name": "The Devourer Below",
       "intro": "This is the intro text for The Gathering",
       "setup": "This is the setup text for The Gathering",
@@ -135,6 +146,7 @@
     },
     "DL1": {
       "view": "StandardScenario",
+      "resolutionView": "StandardResolution",
       "name": "Extracurricular Activity",
       "intro": "This is the intro text for The Gathering",
       "setup": "This is the setup text for The Gathering",
@@ -142,6 +154,7 @@
     },
     "DL2": {
       "view": "StandardScenario",
+      "resolutionView": "StandardResolution",
       "name": "The Gathering",
       "intro": "This is the intro text for The Gathering",
       "setup": "This is the setup text for The Gathering",
