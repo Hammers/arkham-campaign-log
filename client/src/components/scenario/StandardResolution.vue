@@ -4,7 +4,7 @@
         <form>
             <div class="form-group">
                 <label for="investigatorSelect">Resolution</label>
-                <select class="form-control" id="investigatorSelect" v-model="resolution">
+                <select class="form-control" id="investigatorSelect" v-model="resolution" @change="resolutionChanged">
                     <option v-for="(resolution,index) in scenario.resolutions" :value="resolution" :key="index">{{resolution.name}}</option>
                 </select>
             </div>
@@ -16,6 +16,9 @@
         <div v-if="resolution">
             <div>
                 {{this.resolution.text}}
+            </div>
+            <div v-for="(c,index) in actionComponents" :key="index">
+                <component :is="c.name" :actionList="c.actionList"></component>
             </div>
             <div>
                 <ul>
@@ -31,9 +34,13 @@
 
 <script>
     import scenarios from '../../json/scenarios';
+    import MidnightMasks from "./MidnightMasks";
 
     export default {
         name: "",
+        components: {
+            MidnightMasks,
+        },
         computed: {
             campaign() {
                 return this.$store.getters.currentCampaign;
@@ -55,25 +62,51 @@
             return {
                 resolution: null,
                 victoryDisplay: 0,
-                actionInputs: {}
+                actionInputs: {},
+                actionComponents: []
             }
         },
         methods: {
+            resolutionChanged() {
+                this.actionComponents = [];
+                for(var i = 0; i < this.resolution.actions.length; i++) {
+                    if("component" in this.resolution.actions[i]) {
+                        var component = {};
+                        component.name = this.resolution.actions[i].component;
+                        component.actionList = [];
+                        this.actionComponents.push(component);
+                    }
+                }
+            },
             nextScenario() {
-                for (var i = 0; i < this.resolution.actions.length; i++) {
-                    var action = this.resolution.actions[i];
+                var actionList = this.resolution.actions;
+                for(var x = 0; x < this.actionComponents.length; x++) {
+                    actionList.push(...this.actionComponents[x].actionList);
+                }
+                for (var i = 0; i < actionList.length; i++) {
+                    var action = actionList[i];
                     let players = [];
                     switch(action.type) {
                         case "logEntry":
                             console.log("Entering log entry: " + action.entry);
-                            this.campaign.log.find(log => log.name === "Campaign Notes").entries.push(action.entry);
+                            var entry = {
+                                logId: action.entryID,
+                                text: action.entry
+                            };
+                            var logIndex = 0;
+                            if("log" in action) {
+                                logIndex = action.log;
+                            }
+                            this.campaign.log[logIndex].entries.push(entry);
                             break;
                         case "xp":
                             var xp = 0;
                             if(action.includeDisplay) {
                                 xp += Number(this.victoryDisplay);
                             }
-                            xp += Number(action.bonus);
+                            if("bonus" in action) {
+                                xp += Number(action.bonus);
+                            }
                             players = this.getPlayers(action.player);
                             players.forEach(p => {
                                 p.totalXp += xp;

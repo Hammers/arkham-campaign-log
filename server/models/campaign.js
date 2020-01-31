@@ -25,7 +25,12 @@ const campaignSchema = mongoose.Schema({
             logType: String,
             name: String,
             value: Number,
-            entries: [String]
+            entries: [
+                {
+                    logId: String,
+                    text: String
+                }
+            ]
         }]
     },
     {

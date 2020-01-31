@@ -33,7 +33,7 @@
                                 <div v-if="log.logType === 'list'">
                                     <p><strong>{{log.name}}</strong></p>
                                     <ul>
-                                        <li v-for="(entry,entryIndex) in log.entries" :key="entryIndex">{{entry}}</li>
+                                        <li v-for="(entry,entryIndex) in log.entries" :key="entryIndex">{{entry.text}}</li>
                                     </ul>
                                 </div>
                                 <div v-else>

@@ -32,6 +32,15 @@ const getters = {
     },
     currentCampaign(state) {
         return state.currentCampaign;
+    },
+    basicLogIds(state) {
+        let ids = [];
+        let entries = state.currentCampaign.log[0].entries;
+        for(var i = 0; i < entries.length; i++)
+        {
+            ids.push(entries[i].logId);
+        }
+        return ids;
     }
 };
 

@@ -1,13 +1,14 @@
 <template>
     <div class="conatainer">
-        <div class="card">
-            <div class="card-header">
-                <h3>{{scenario.name}}</h3>
+        <div class="row justify-content-center">
+            <div class="card col-12 col-sm-9">
+                <div class="card-header">
+                    <h3>{{scenario.name}}</h3>
+                </div>
+                <div class="card-body">
+                    <component :is="scenario.view"></component>
+                </div>
             </div>
-            <div class="card-body">
-                <component :is="scenario.view"></component>
-            </div>
-            
         </div>
     </div>
 </template>
