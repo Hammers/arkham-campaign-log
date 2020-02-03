@@ -10,6 +10,7 @@
       "view": "StandardScenario",
       "resolutionView": "StandardResolution",
       "name": "The Gathering",
+      "canResign": true,
       "intro": [{"text":"You and your partners have been investigating strange events taking place in your home city of Arkham, Massachusetts. Over the past few weeks, several townspeople have mysteriously gone missing. Recently, their corpses turned up in the woods, savaged and half-eaten. The police and newspapers have stated that wild animals are responsible, but you believe there is something else going on. You are gathered together at the lead investigator’s home to discuss these bizarre events."}],
       "setup": [
         {"text": "Gather all cards from the following encounter sets: The Gathering, Rats, Ghouls, Striking Fear, Ancient Evils, and Chilling Cold. These sets are indicated by the following icons:"},
@@ -136,6 +137,7 @@
       "view": "StandardScenario",
       "resolutionView": "StandardResolution",
       "name": "The Midnight Masks",
+      "canResign": true,
       "intro": [{
           "logNeeded": "LITA_FORCED",
           "text": "The woman came to you in a panic, raving about monsters emerging\nfrom the ground in a home near Rivertown. “I managed to trap them,” she\nexplains, “but there are others. Other pits. Other domains.” Only last week,\nyou would have thought she was a lunatic. Recent events, however, have\nchallenged your preconceptions of normality. You decide to hear her out.\nShe introduces herself as Lita Chantler and lays out a tale that strains\nthe limits of your belief. “The creatures I speak of ,” she claims, “are called\nghouls—cruel beings who plague the crypts, caverns, and tunnels beneath the\ncity of Arkham…”"
@@ -300,6 +302,127 @@
           "logNeeded": "GHOUL_PRIEST",
           "test": "Shuffle the Ghoul Priest into the encounter deck."
         }
+      ],
+      "resolutions": [
+        {
+          "name": "No Resolution Reached",
+          "text": " Too frightened to face her fate, Lita flees\ninto the night. She realizes that she has failed and Umôrdhoth’s\nvengeance will pursue her wherever she goes. The creature’s\ntendrils spread throughout the city of Arkham, searching for\nher. It lurks in the darkness of every corner, tugging at the seams\nof reality. But Lita is nowhere to be found, so the creature dwells\nin the shadows to this day, searching… killing",
+          "actions": [
+            {
+              "type": "logEntry",
+              "entry": "Arkham succumbed to Umordhoth's terrible vengeance",
+              "entryID": "LOSE"
+            },
+            {
+              "type": "kill",
+              "player": "all",
+              "text": "Each investigator is killed"
+            },
+            {
+              "type": "lose",
+              "text": "The investigators lose"
+            }
+          ]
+        },
+        {
+          "name": "Resolution 1",
+          "text": "You have managed to prevent the cult from\nsummoning its master. Although you’re unsure what would\nhave happened had the cult succeeded, you’re relieved that—at\nleast for the time being—Arkham is safe. You capture as many\ncultists as you can find, but very few townspeople believe your\ntale. Perhaps it was all in your head, after all.",
+          "actions": [
+            {
+              "type": "logEntry",
+              "entry": "The ritual to summon Umordhoth was broken.",
+              "entryID": "STOPPED_RITUAL"
+            },
+            {
+              "type": "mentalTrauma",
+              "amount": 2,
+              "player": "all",
+              "text": "Each investigator suffers 2 mental trauma, as he or she never fully recovers from his or her ordeal"
+            },
+            {
+              "type": "xp",
+              "includeDisplay": true,
+              "bonus": 5,
+              "player": "all",
+              "text": "Each investigator earns 5 bonus experience as he or she has saved Arkham from a terrible fate."
+            },
+            {
+              "type": "win",
+              "text":"The investigators win!"
+            }
+          ]
+        },
+        {
+          "name": "Resolution 2",
+          "text": "Through force of arms and strength of will,\nyou are somehow able to harm Umôrdhoth enough to send it\nreeling back to the dimension from which it emerged. Warmth\nand light return to the woods as the void-like mass is sucked in\nupon itself, vanishing in an instant. You aren’t sure if a being\nsuch as this can be killed, but for the time being it seems to have\nretreated. As their master vanishes, the ghouls nearby climb\ninto the open pit below, fleeing with terrible cries and shrieks.\nYou have stopped an evil plot, but the fight has taken its toll on\nyour body and mind. Worse, you can’t help but feel insignificant\nin the face of the world’s mysteries. What other terrors exist in\nthe deep, dark corners of reality?",
+          "actions": [
+            {
+              "type": "logEntry",
+              "entry": "The investigators repelled Umordhoth",
+              "entryID": "KILLED_UMORDHOTH"
+            },
+            {
+              "type": "physicalTrauma",
+              "amount": 2,
+              "player": "all"
+            },
+            {
+              "type": "mentalTrauma",
+              "amount": 2,
+              "player": "all",
+              "text": "Each investigator suffers 2 physical Trauma, 2 mental trauma, as the fight against Umordhoth has taken its toll on his or her body and mind."
+            },
+            {
+              "type": "xp",
+              "includeDisplay": true,
+              "bonus": 10,
+              "player": "all",
+              "text": "Each investigator earns 10 bonus experience as he or she has triumphed in a battle against a truly terrible foe."
+            },
+            {
+              "type": "win",
+              "text":"The investigators win!"
+            }
+          ]
+        },
+        {
+          "name": "Resolution 3",
+          "text": "In the face of this horror, you don’t believe there\nis anything you can do to stop it. You have but one hope if you\nare to survive. You turn on Lita and throw her at the terrible\nmonstrosity, watching in dread as its swirling void-like mass\nconsumes her. She cries out in torment as the life is sucked from\nher body. “Umôrdhoth…Umôrdhoth…” the cultists chant.\nLita Chantler vanishes without a trace. For a moment, you\nfear that the creature will now turn on you, but you hear one of\nthe cultists say, “Umôrdhoth is a just god who claims only the\nguilty and the dead. Go, and you shall be spared.” The swirling\nmass vanishes, and warmth and light return to the woods. The\ncultists slink away, leaving you alive. Lita’s last moments are\nforever etched upon your memory.",
+          "actions": [
+            {
+              "type": "logEntry",
+              "entry": "The investigators sacrificed Lita Chandler to Umordhoth.",
+              "entryID": "SACRIFICED_LITA"
+            },
+            {
+              "type": "physicalTrauma",
+              "amount": 2,
+              "player": "all"
+            },
+            {
+              "type": "weakness",
+              "card": "random",
+              "traits": ["madness"],
+              "text": "The guilt over sacrificing Lita forever haunts your\nmemory. Each investigator must search the collection\nfor a random Madness weakness and add it to his or\nher deck."
+            },
+            {
+              "type": "mentalTrauma",
+              "amount": 2,
+              "player": "all",
+              "text": "Each investigator suffers 2 physical Trauma, 2 mental trauma, as the mere sight of Umordhoth has taken its toll on his or her body and mind."
+            },
+            {
+              "type": "xp",
+              "includeDisplay": true,
+              "player": "all"
+            },
+            {
+              "type": "end",
+              "text": "The investigators have survived, but their actions weigh heavily on their consciences"
+            }
+          ]
+        }
+
       ],
       "nextScenario": null
     }

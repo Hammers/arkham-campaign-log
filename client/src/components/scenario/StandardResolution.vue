@@ -12,6 +12,29 @@
                 <label for="victoryDisplay">Victory Display</label>
                 <input type="number" class="form-control" id="victoryDisplay" v-model="victoryDisplay">
             </div>
+            <div class="my-3" id="playerOutcomes">
+            <label for="playerOutcomes">Player Outcomes</label>
+            <div class="card" v-for="(outcome,index) in playerOutcomes" :key="outcome.player._id">
+                
+                <div class="card-body p-1">
+                    <div class="row">
+                        <strong class="col-3">{{outcome.player.playerName}}:</strong>
+                        <div class="ml-3 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" :id="'resigned' + index" @change="defeatChanged(outcome,'resigned')" v-model="outcome.resigned" v-if="scenario.canResign">
+                            <label class="form-check-label" :for="'resigned' + index">Resigned</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" :id="'physical' + index" @change="defeatChanged(outcome,'physical')" v-model="outcome.physical">
+                            <label class="form-check-label" :for="'physical' + index">Physical Defeat</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" :id="'mental' + index" @change="defeatChanged(outcome,'mental')" v-model="outcome.mental">
+                            <label class="form-check-label" :for="'mental' + index">Mental Defeat</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </form>
         <div v-if="resolution">
             <div>
@@ -63,10 +86,32 @@
                 resolution: null,
                 victoryDisplay: 0,
                 actionInputs: {},
-                actionComponents: []
+                actionComponents: [],
+                playerOutcomes: [],
             }
         },
+        created() {
+            this.campaign.players.forEach(x => {
+                var outcome = {
+                    player: x,
+                    resigned: false,
+                    mental: false,
+                    physical: false,
+                };
+                this.playerOutcomes.push(outcome);
+            });
+        },
         methods: {
+            defeatChanged(outcome,type) {
+                for(var x in outcome)
+                {
+                    if(x === "player")
+                        continue;
+                    if(x !== type) {
+                        outcome[x] = false;
+                    }
+                }
+            },
             resolutionChanged() {
                 this.actionComponents = [];
                 for(var i = 0; i < this.resolution.actions.length; i++) {
@@ -141,6 +186,14 @@
                             break;
                     }
                 }
+                this.playerOutcomes.forEach(outcome => {
+                    if(outcome.physical) {
+                        outcome.player.physicalTrauma++;
+                    }
+                    if(outcome.mental) {
+                        outcome.player.mentalTrauma++;
+                    }
+                });
                 this.campaign.currentScenario = this.scenario.nextScenario;
                 this.$store.dispatch('updateCurrentCampaign');
                 this.$router.push('/campaigns/current')
